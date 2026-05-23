@@ -3,9 +3,10 @@ kind: Deployment
 
 metadata:
   name: learning-app
+  namespace: deploy
 
 spec:
-  replicas: 2
+  replicas: 3
 
   selector:
     matchLabels:
