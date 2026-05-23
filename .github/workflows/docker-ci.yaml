@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/learning-app:latest -f /pr07/Dockerfile pr07
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/learning-app:latest -f pr07/Dockerfile pr07
 
           docker tag \
           ${{ secrets.DOCKER_USERNAME }}/learning-app:latest \
