@@ -6,8 +6,7 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'pr08/**
+      
 jobs:
   docker:
     runs-on: ubuntu-latest
