@@ -1,0 +1,12 @@
+replicaAccount: 1
+env:
+  NODE_ENV: Production
+
+  resource:
+    requests:
+      cpu: 500m
+      memory: 64Mi
+
+    limits:
+      cpu: 100m
+      memory: 128Mi
