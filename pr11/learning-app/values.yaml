@@ -2,14 +2,14 @@ replicaCount: 2
 
 image:
   repository: idven/learning-app
-  tag: latest
+  tag: has
   pullPolicy: Always
 
 service:
   type: NodePort
   port: 80
   targetPort: 3000
-  nodePort: 30080
+  nodePort: 30001
 
 resources:
   requests:

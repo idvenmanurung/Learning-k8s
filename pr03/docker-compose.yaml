@@ -10,9 +10,10 @@ services:
       DB_USER: user
       DB_PASSWORD: secret123
       DB_NAME: appdb
+    
     depends_on:
-      mysql:
-        condition: service_healthy
+      - mysql
+
 
   mysql:
     image: mysql:8

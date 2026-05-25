@@ -1,6 +1,4 @@
 name: Docker CI
-env:
-  FORCE_JAVASCRIPT_ACTION_TO_NODE: true
 
 on:
   push:
@@ -21,28 +19,19 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Get Short SHA
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/learning-app:latest -f pr06/Dockerfile pr06
-
-          docker tag \
-          ${{ secrets.DOCKER_USERNAME }}/learning-app:latest \
-          ${{ secrets.DOCKER_USERNAME }}/learning-app:${{ steps.vars.outputs.sha_short }}
+          docker build \
+          -t ${{ secrets.DOCKER_USERNAME }}/learning-app:v2 \
+          -f pr06/Dockerfile pr06
 
       - name: Run Trivy Scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ secrets.DOCKER_USERNAME }}/learning-app:latest'
+          image-ref: '${{ secrets.DOCKER_USERNAME }}/learning-app:v2'
           format: 'table'
           exit-code: '0'
           severity: 'CRITICAL,HIGH'
 
-      - name: Push Latest
+      - name: Push Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/learning-app:latest
-
-      - name: Push SHA Tag
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/learning-app:${{ steps.vars.outputs.sha_short }}

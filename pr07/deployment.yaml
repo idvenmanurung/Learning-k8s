@@ -6,7 +6,7 @@ metadata:
   namespace: deploy
 
 spec:
-  replicas: 3
+  replicas: 2
 
   selector:
     matchLabels:
@@ -21,7 +21,7 @@ spec:
       containers:
         - name: learning-app
 
-          image: idven/learning-app:latest
+          image: idven/learning-app:latest  
 
           ports:
             - containerPort: 3000

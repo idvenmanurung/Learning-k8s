@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: "{{ .Release.Name }}-migration"
+
+  annotations:
+    "helm.sh/hook": pre-upgrade,pre-install
+    "helm.sh/hook-delete-policy": before-hook-creation
+
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+
+      containers:
+        - name: migration
+
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+          command:
+            - sh
+            - -c
+            - |
+              echo "Running database migration..."
+              sleep 10
+              echo "Migration complete!"
