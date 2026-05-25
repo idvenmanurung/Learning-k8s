@@ -34,4 +34,4 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: Push Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/learning-app:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/learning-app:v2
